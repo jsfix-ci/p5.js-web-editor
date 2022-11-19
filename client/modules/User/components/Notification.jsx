@@ -6,7 +6,7 @@ import { showToast, setToastText } from '../../IDE/actions/toast';
 function Notification() {
   const dispatch = useDispatch();
   useEffect(() => {
-    const notification = Cookies.get('p5-notification');
+    const notification = JSON.parse(Cookies.get('p5-notification'));
     if (!notification) {
       // show the toast
       dispatch(showToast(30000));

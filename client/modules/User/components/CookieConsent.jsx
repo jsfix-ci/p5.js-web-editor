@@ -83,7 +83,7 @@ function CookieConsent({ hide }) {
   function initializeCookieConsent() {
     if (user.authenticated) {
       setBrowserCookieConsent(user.cookieConsent);
-      Cookies.set('p5-cookie-consent', user.cookieConsent, { expires: 365 });
+      Cookies.set('p5-cookie-consent', JSON.stringify(user.cookieConsent), { expires: 365 });
       return;
     }
     setBrowserCookieConsent('none');
@@ -116,13 +116,13 @@ function CookieConsent({ hide }) {
         dispatch(setUserCookieConsent(cookieConsent));
       } else if (user.cookieConsent !== 'none') {
         setBrowserCookieConsent(user.cookieConsent);
-        Cookies.set('p5-cookie-consent', user.cookieConsent, { expires: 365 });
+        Cookies.set('p5-cookie-consent', JSON.stringify(user.cookieConsent), { expires: 365 });
       }
     }
   }
 
   useEffect(() => {
-    const p5CookieConsent = Cookies.get('p5-cookie-consent');
+    const p5CookieConsent = JSON.parse(Cookies.get('p5-cookie-consent'));
     if (p5CookieConsent) {
       setBrowserCookieConsent(p5CookieConsent);
     } else {
